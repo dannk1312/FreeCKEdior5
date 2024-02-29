@@ -7,9 +7,9 @@ import { ClassicEditor } from '@ckeditor/ckeditor5-editor-classic';
 
 import { Alignment } from '@ckeditor/ckeditor5-alignment';
 import { Autoformat } from '@ckeditor/ckeditor5-autoformat';
+import { Autosave } from '@ckeditor/ckeditor5-autosave';
 import {
 	Bold,
-	Code,
 	Italic,
 	Strikethrough,
 	Subscript,
@@ -17,7 +17,7 @@ import {
 	Underline
 } from '@ckeditor/ckeditor5-basic-styles';
 import { BlockQuote } from '@ckeditor/ckeditor5-block-quote';
-import { CodeBlock } from '@ckeditor/ckeditor5-code-block';
+import { CloudServices } from '@ckeditor/ckeditor5-cloud-services';
 import type { EditorConfig } from '@ckeditor/ckeditor5-core';
 import { Essentials } from '@ckeditor/ckeditor5-essentials';
 import { FindAndReplace } from '@ckeditor/ckeditor5-find-and-replace';
@@ -44,6 +44,7 @@ import {
 	ImageUpload
 } from '@ckeditor/ckeditor5-image';
 import { Indent, IndentBlock } from '@ckeditor/ckeditor5-indent';
+import { TextPartLanguage } from '@ckeditor/ckeditor5-language';
 import { AutoLink, Link, LinkImage } from '@ckeditor/ckeditor5-link';
 import { List, ListProperties, TodoList } from '@ckeditor/ckeditor5-list';
 import { Markdown } from '@ckeditor/ckeditor5-markdown-gfm';
@@ -77,7 +78,8 @@ import {
 } from '@ckeditor/ckeditor5-table';
 import { TextTransformation } from '@ckeditor/ckeditor5-typing';
 import { Undo } from '@ckeditor/ckeditor5-undo';
-import { Base64UploadAdapter } from '@ckeditor/ckeditor5-upload';
+import { SimpleUploadAdapter } from '@ckeditor/ckeditor5-upload';
+import { EditorWatchdog } from '@ckeditor/ckeditor5-watchdog';
 import { WordCount } from '@ckeditor/ckeditor5-word-count';
 
 // You can read more about extending the build with additional plugins in the "Installing plugins" guide.
@@ -89,11 +91,10 @@ class Editor extends ClassicEditor {
 		AutoImage,
 		AutoLink,
 		Autoformat,
-		Base64UploadAdapter,
+		Autosave,
 		BlockQuote,
 		Bold,
-		Code,
-		CodeBlock,
+		CloudServices,
 		DataFilter,
 		DataSchema,
 		Essentials,
@@ -133,6 +134,7 @@ class Editor extends ClassicEditor {
 		RemoveFormat,
 		SelectAll,
 		ShowBlocks,
+		SimpleUploadAdapter,
 		SourceEditing,
 		SpecialCharacters,
 		SpecialCharactersArrows,
@@ -152,6 +154,7 @@ class Editor extends ClassicEditor {
 		TableColumnResize,
 		TableProperties,
 		TableToolbar,
+		TextPartLanguage,
 		TextTransformation,
 		Title,
 		TodoList,
@@ -166,51 +169,43 @@ class Editor extends ClassicEditor {
 				'heading',
 				'style',
 				'|',
-				'fontColor',
-				'fontBackgroundColor',
-				'fontSize',
-				'fontFamily',
-				'|',
 				'bold',
 				'underline',
 				'italic',
 				'strikethrough',
 				'subscript',
 				'superscript',
+				'link',
+				'removeFormat',
 				'|',
-				'bulletedList',
-				'numberedList',
+				'fontBackgroundColor',
+				'fontColor',
+				'fontFamily',
+				'fontSize',
+				'highlight',
+				'|',
+				'alignment',
 				'outdent',
 				'indent',
-				'showBlocks',
-				'alignment',
+				'bulletedList',
+				'numberedList',
 				'|',
-				'link',
-				'imageUpload',
 				'imageInsert',
-				'mediaEmbed',
+				'imageUpload',
+				'blockQuote',
 				'insertTable',
+				'mediaEmbed',
+				'|',
+				'pageBreak',
+				'horizontalLine',
+				'specialCharacters',
 				'htmlEmbed',
 				'|',
-				'blockQuote',
-				'highlight',
-				'code',
-				'codeBlock',
-				'|',
-				'horizontalLine',
-				'pageBreak',
 				'sourceEditing',
-				'|',
-				'specialCharacters',
-				'todoList',
-				'|',
 				'selectAll',
-				'removeFormat',
-				'findAndReplace',
 				'undo',
 				'redo'
-			],
-			shouldNotGroupWhenFull: true
+			]
 		},
 		language: 'vi',
 		image: {
@@ -235,4 +230,4 @@ class Editor extends ClassicEditor {
 	};
 }
 
-export default Editor;
+export default { Editor, EditorWatchdog };
